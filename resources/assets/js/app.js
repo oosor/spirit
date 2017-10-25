@@ -1,22 +1,49 @@
+'use strict';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+class App {
 
-require('./bootstrap');
+    constructor() {
+        this.init();
+    }
 
-window.Vue = require('vue');
+    init() {
+        this.topMenu();
+    }
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    topMenu() {
+        $(window).scroll(() => {
+            if ($(window).scrollTop() > 40)
+                $('.navbar').removeClass('bg-transparent');
+            else
+                $('.navbar').addClass('bg-transparent');
+        });
 
-Vue.component('example', require('./components/Example.vue'));
+        $('.navbar-nav').on('mouseover', 'a.dropdown-toggle', (event) => {
+            setTimeout(() => {
+                $(event.target).parent('.dropdown').addClass('show');
+            }, 200);
+        }).on('mouseleave', 'a.dropdown-toggle, .dropdown-menu', (event) => {
+            setTimeout(() => {
+                if(!$(event.target).parents('.nav-item.dropdown').first().find(':hover').length) {
+                    $(event.target).parents('.dropdown').removeClass('show');
+                    return true;
+                }
+                if($(event.target).hasClass('dropdown-toggle')
+                    && $(event.target).parent().hasClass('dropdown-submenu')) {
+                    if(!$(event.target).closest('.dropdown').find(':hover').length)
+                        $(event.target).closest('.dropdown').removeClass('show');
+                    return true;
+                }
+                if($(event.target).parent().hasClass('dropdown-submenu')
+                    || ($(event.target).parent().hasClass('dropdown-menu')
+                        && !$(event.target).parent().hasClass('dropdown-submenu'))) {
+                    $(event.target).closest('.dropdown').removeClass('show');
+                }
+            }, 200);
+        });
 
-const app = new Vue({
-    el: '#app'
-});
+    }
+
+}
+
+new App();
