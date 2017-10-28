@@ -874,6 +874,22 @@ body {
   cursor: pointer;
 }
 
+.detal-word .active, .intro .active {
+  -webkit-box-shadow: 0px 0px 4px 1px #E8850C;
+          box-shadow: 0px 0px 4px 1px #E8850C;
+}
+
+.detal-word .ru-bible {
+  -webkit-transition: opacity .15s linear;
+  transition: opacity .15s linear;
+}
+
+.detal-word .ru-bible:hover {
+  cursor: pointer;
+  color: #428bca;
+  opacity: .8;
+}
+
 .detal-word a {
   color: #007bff !important;
   -webkit-transition: opacity .15s linear;
@@ -885,6 +901,14 @@ body {
   color: #428bca;
   opacity: .8;
   text-decoration: none;
+}
+
+.detal-word a.simphony-ru {
+  color: #868e96 !important;
+}
+
+.detal-word a.simphony-ru:hover {
+  color: #428bca !important;
 }
 
 .detal-word .word-abr {
@@ -943,6 +967,17 @@ body {
 
 .poper-full-click .blockquote {
   margin: 0 !important;
+}
+
+.box-other {
+  border-top: 1px solid #cccccc;
+  padding-top: 20px;
+  font-size: 13px;
+}
+
+.box-other .item-other {
+  display: inline-block;
+  color: #555555;
 }
 
 .blog-sidebar-posts .post .continue-reading {

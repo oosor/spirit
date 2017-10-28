@@ -940,7 +940,25 @@ body {
     }
 }
 
+.detal-word, .intro {
+    .active {
+        box-shadow: 0px 0px 4px 1px #E8850C;
+    }
+}
 .detal-word {
+
+    .ru-bible {
+        -webkit-transition: opacity .15s linear;
+        -moz-transition: opacity .15s linear;
+        -ms-transition: opacity .15s linear;
+        -o-transition: opacity .15s linear;
+        transition: opacity .15s linear;
+        &:hover {
+            cursor: pointer;
+            color: #428bca;
+            opacity: .8;
+        }
+    }
     a {
         color: #007bff !important;
         -webkit-transition: opacity .15s linear;
@@ -953,6 +971,13 @@ body {
             color: #428bca;
             opacity: .8;
             text-decoration: none;
+        }
+
+        &.simphony-ru {
+            color: #868e96 !important;
+            &:hover {
+                color: #428bca !important;
+            }
         }
     }
     .word-abr {
@@ -1004,6 +1029,15 @@ body {
     }
     .blockquote {
         margin: 0 !important;
+    }
+}
+.box-other {
+    border-top: 1px solid #cccccc;
+    padding-top: 20px;
+    font-size: 13px;
+    .item-other {
+        display: inline-block;
+        color:#555555;
     }
 }
 

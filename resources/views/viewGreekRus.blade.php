@@ -9,7 +9,7 @@
 
 @section('scripts')
     @parent
-    <script src="dist/view-greek-ru.js"></script>
+    <script src="{{ asset('dist/view-greek-ru.js') }}"></script>
 @endsection
 
 @section('content')
@@ -29,22 +29,30 @@
                         <img src="images/uifaces/11.jpg" class="avatar" alt="author" />
                         Jessica Smith, October 03, 2015
                     </div>
-                    <div class="intro" data="{{ $data[0]->ot_nt . '.' . $data[0]->book }}">
+                    <div class="intro" data="{{ $data->ot_nt . '.' . $data->book }}">
                         <div class="title">
-                        @foreach($data as $el)
-                            @for($i=0;$i<count($el->a_1->data);$i++)
+                            @for($i=0;$i<count($data->a_1->data);$i++)
                                     {!! $i == 8 ? '</div>' : '' !!}
-                                @if(empty($el->a_1->data[$i]))
+                                @if(empty($data->a_1->data[$i]))
                                     {!! $i < 9 ? '' : '<br>' !!}
                                     @continue
                                 @endif
-                        <div class="word-block">
-                            <span class="word greek-word{{ (ctype_digit($el->a_1->data[$i])) ? (' digit' . ($i < 8 ? ' chapter' : '')) : '' }}" data="{{ $el->a_3->data[$i] }}">{!! $el->a_1->data[$i] !!}</span>
-                            <span class="word ru-word" data="{{ $el->a_4->data[$i] }}">{!! $el->a_4->data[$i] !!}</span>
-                        </div>
+                            <div class="word-block">
+                                <span class="word greek-word{{ (ctype_digit($data->a_1->data[$i])) ? (' digit' . ($i < 8 ? ' chapter' : '')) : '' }}" data="{{ $data->a_3->data[$i] }}">{!! $data->a_1->data[$i] !!}</span>
+                                <span class="word ru-word" data="{{ $data->a_4->data[$i] }}">{!! $data->a_4->data[$i] !!}</span>
+                            </div>
                             @endfor
-                        @endforeach
-                    </div>
+                        </div>
+                        <div class="box-other">
+                            @foreach($data->cr as $el)
+                            <div class="item-other">
+                                <span>[{{ $el->averse }}] </span>
+                                @foreach($el->links as $link)
+                                <a href="{{ asset('view/?ot_nt=' . ($link->book > 50 && ($link->book != 78) ? 'NT' : 'OT') . '&book=' . $CONST->BOOK_LINKS_GREEK[$link->book-1] . '&chapter=' . $link->chapter . '&cn=' . $link->verse) }}">{{ $link->nameBook }} {{ $link->chapter }}:{{ $link->verse }}</a>;
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
                     <a href="blog-post.html" class="continue-reading">Continue reading this post</a>
                 </div>
             </div>

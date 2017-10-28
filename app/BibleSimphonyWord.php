@@ -16,7 +16,6 @@ class BibleSimphonyWord extends Model
 
     public function getEmptysAttribute($value)
     {
-        $array = explode(';', $value);
-        return array_slice($array, 0, count($array)-1);
+        return explode(';', $value);
     }
 }

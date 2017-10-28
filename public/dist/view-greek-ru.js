@@ -139,7 +139,7 @@ var ViewGreekRu = function () {
 
                     var poper = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold" style="font-family: GrkV">' + response.data.word.header.greek + '</p>' + '                    <small class="text-muted">' + links + '</small>' + '                    <footer>' + '                      <small class="text-muted">' + '                        <div><span>сл.ф.:</span> <a class="symphony" data="' + response.data.word.header.otherGreek.code + '" style="font-family: GrkV">' + response.data.word.header.otherGreek.greek + '</a></div>' + '                        ' + (other.length != 0 ? '<div><span>см.т.:</span> ' + other : '') + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
 
-                    if (activePoper) {
+                    if (activePoper || element.closest('#wordModal').length) {
                         _this.setMoodalData(poper, '');
                     } else {
                         $('body').append(poper);
@@ -189,7 +189,7 @@ var ViewGreekRu = function () {
 
                     var poper = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold">' + response.data.word.header + '</p>' + '                    <small class="text-muted">' + otherGreek + '</small>' + '                    <footer>' + '                      <small class="text-muted">' + '                        ' + (other.length != 0 ? '<div><span>см.т.:</span> ' + other : '') + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
 
-                    if (activePoper) {
+                    if (activePoper || element.closest('#wordModal').length) {
                         _this.setMoodalData(poper, '');
                     } else {
                         $('body').append(poper);
@@ -217,12 +217,14 @@ var ViewGreekRu = function () {
             }).on('click', '.greek-chapter', function (event) {
                 var element = $(event.target);
 
-                var params = element.attr('data').split('/');
+                var params = element.attr('data').split('/'),
+                    cn = element.hasClass('chapter') ? 0 : element.text();
                 axios.post('/chapter-greek', {
                     code: element.attr('data'),
                     ot_nt: params[0],
                     book: params[1],
-                    chapter: params[2]
+                    chapter: params[2],
+                    cn: cn
                 }).then(function (response) {
 
                     var mdata = '';
@@ -232,12 +234,12 @@ var ViewGreekRu = function () {
                             if (el2.trim() == '') {
                                 mdata += index < 9 ? '' : '<br>';
                             } else {
-                                mdata += '<div class="word-block">' + '                            <span class="greek-word' + (!isNaN(el2) && index > 8 ? ' digit' : '') + '" data="' + el.a_3.data[index] + '">' + el2 + '</span>' + '                            <span class="ru-word" data="' + _this.escapeHtml(el.a_4.data[index]) + '">' + el.a_4.data[index] + '</span>' + '                        </div>';
+                                mdata += '<div class="word-block">' + '                            <span class="greek-word' + (!isNaN(el2) ? ' digit' + (index < 8 ? ' chapter' : cn != 0 && cn == parseInt(el2, 10) ? ' active' : '') : '') + '" data="' + el.a_3.data[index] + '">' + el2 + '</span>' + '                            <span class="ru-word" data="' + _this.escapeHtml(el.a_4.data[index]) + '">' + el.a_4.data[index] + '</span>' + '                        </div>';
                             }
                         });
                     });
 
-                    var modal = $('<div class="intro">' + '                        <div class="title">' + mdata + '                        </div>' + '                      </div>');
+                    var modal = $('<div class="intro" data="' + response.data[0].ot_nt + '.' + response.data[0].book + '">' + '                        <div class="title">' + mdata + '                        </div>' + '                      </div>');
 
                     _this.setMoodalData(modal, '');
                 });
@@ -301,21 +303,78 @@ var ViewGreekRu = function () {
                         });
                     });
                 });
+            }).on('click', '.simphony-ru', function (event) {
+
+                var element = $(event.target);
+
+                axios.post('/ru-simphony', {
+                    word: element.text()
+                }).then(function (response) {
+
+                    var other = '';
+                    response.data.word.emptys.forEach(function (el) {
+                        other += '<a class="simphony-ru">' + el + '</a>; ';
+                    });
+
+                    var links = '';
+                    response.data.word.links.forEach(function (el) {
+                        var parse = el.split(':');
+                        links += '<a class="greek-word digit sim-word" data="' + el + '">' + _this.getShortWord(parse[0]) + ' ' + parse[1] + ';</a> ';
+                    });
+
+                    var modal = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold">' + response.data.word.word + ' (' + response.data.word.cifral + ')</p>' + '                    <small>' + links + '</small>' + '                    <footer>' + '                      <small class="text-muted">см.т. ' + other + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
+
+                    _this.setMoodalData(modal, '');
+                });
             });
         }
     }, {
         key: 'openRuBook',
         value: function openRuBook(el) {
+            var _this2 = this;
 
-            var book = el.closest('.intro'),
-                ot_nt_book = book.attr('data').split('.');
+            var code = void 0,
+                book = void 0,
+                ot_nt_book = void 0,
+                cn = void 0;
+            console.log(el.attr('class'));
+            if (el.hasClass('sim-word')) {
+                console.log(1);
+                code = this.setCode(el.attr('data'));
+            } else {
+                console.log(2);
+                book = el.closest('.intro') /*.length ? el.closest('.intro') : el.closest('.detal-word')*/
+                , ot_nt_book = book.attr('data').split('.'), cn = el.hasClass('chapter') ? 0 : el.text();
+            }
 
-            axios.post('/ru-bible', {
+            axios.post('/ru-bible', el.hasClass('sim-word') ? {
+                code: code,
+                word: el.text(),
+                is: false
+            } : {
                 ot_nt: ot_nt_book[0],
                 book: ot_nt_book[1],
                 chapter: book.find('.chapter').text(),
-                cn: el.hasClass('chapter') ? 0 : el.text()
-            }).then(function (response) {});
+                cn: cn,
+                is: true
+            }).then(function (response) {
+
+                var box = '';
+                response.data.a.data.forEach(function (el, i) {
+                    box += '<div ' + (cn != 0 && cn == i + 1 ? 'class="active"' : '') + '>';
+                    var arrayWords = el.split(' ');
+                    arrayWords.forEach(function (word, index) {
+                        if (index == 0) box += word;else if (index == 1) box += ' data="' + (response.data.ot_nt + '/' + response.data.book + '/' + response.data.chapter) + '" ' + word;else if (index == 2) box += ' ' + word;else {
+                            box += ' <a class="simphony-ru">' + word + '</a>';
+                        }
+                    });
+                    box += '</div>';
+                });
+
+                var modal = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold chapter greek-chapter ru-bible" data="' + (response.data.ot_nt + '/' + response.data.book + '/' + response.data.chapter) + '">' + response.data.t + '</p>' + '                    <footer>' + '                      <small class="text-muted">' + '                        ' + box + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
+
+                _this2.setMoodalData(modal, '');
+            });
         }
     }, {
         key: 'destroyPopper',
@@ -331,6 +390,18 @@ var ViewGreekRu = function () {
             poper.find('.remove').remove();
             $('#wordModal').find('.modal-title').text(header);
             $('#wordModal').find('.modal-body').html(poper);
+        }
+    }, {
+        key: 'getShortWord',
+        value: function getShortWord(index) {
+            var words = ['Быт', 'Исх', 'Лев', 'Чис', 'Втор', 'Нав', 'Суд', 'Руфь', '1Цар', '2Цар', '3Цар', '4Цар', '1Пар', '2Пар', 'Езд', 'Неем', '2Езд', 'Тов', 'Иудифь', 'Есф', 'Иов', 'Пс', 'Притч', 'Еккл', 'Песн', 'Прем', 'Сир', 'Ис', 'Иер', 'Плач', 'Посл.Иер', 'Вар', 'Иез', 'Дан', 'Ос', 'Иоил', 'Ам', 'Авд', 'Иона', 'Мих', 'Наум', 'Авв', 'Соф', 'Агг', 'Зах', 'Мал', '1Мак', '2Мак', '3Мак', '3Езд', 'Мф', 'Мк', 'Лк', 'Ин', 'Деян', 'Иак', '1Пет', '2Пет', '1Ин', '2Ин', '3Ин', 'Иуд', 'Рим', '1Кф', '2Кф', 'Гал', 'Еф', 'Флп', 'Кол', '1Фес', '2Фес', '1Тим', '2Тим', 'Тит', 'Флм', 'Евр', 'Откр'];
+            return words[index - 1];
+        }
+    }, {
+        key: 'setCode',
+        value: function setCode(data) {
+            var parse = data.split(':');
+            return (parse[0].length == 1 ? '0' + parse[0] : parse[0]) + '_' + (parse[1].length == 1 ? '00' + parse[1] : parse[1].length == 2 ? '0' + parse[1] : parse[1]);
         }
     }, {
         key: 'escapeHtml',
