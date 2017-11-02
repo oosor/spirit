@@ -17,8 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('/view', 'GreekRuController@index');
-
-
+Route::get('/bible', 'BibleController@index');
 
 
 
@@ -31,6 +30,7 @@ Route::post('/chapter-greek', 'GreekRuController@chapterGreek');
 Route::post('/symphony-greek-word', 'GreekRuController@symphonyGWord');
 Route::post('/ru-bible', 'GreekRuController@ruBible');
 Route::post('/ru-simphony', 'GreekRuController@ruSimphony');
+Route::post('/greek-template', 'GreekRuController@chapterGreek');
 
 
 

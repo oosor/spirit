@@ -996,7 +996,7 @@ body {
 }
 
 .blog-sidebar-posts .sidebar .updates {
-  padding: 25px 17px;
+  padding: 10px 1px;
   border-radius: 5px;
   border: 1px solid #e2e7f0;
   text-align: center;
@@ -1019,14 +1019,58 @@ body {
   margin-top: 12px;
 }
 
-.blog-sidebar-posts .sidebar .updates p {
-  margin-top: 9px;
-  color: #555;
-  margin-bottom: 5px;
+#accordion .card-header {
+  padding: 6px 10px;
+  text-align: left;
 }
 
-.blog-sidebar-posts .sidebar .updates a {
-  margin-top: 30px;
+#accordion .card-header h5 {
+  font-size: 14px;
+}
+
+#accordion .card .card-body {
+  padding: 2px;
+}
+
+#accordion .card .card-body .pagination {
+  padding-left: 1px;
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-size: 12px;
+}
+
+#accordion .card .card-body .pagination li.page-item {
+  margin-bottom: 1px;
+}
+
+#accordion .card .card-body .pagination li.page-item.active .page-link {
+  z-index: 0;
+}
+
+#accordion .card .card-body .pagination li.page-item:first-child .page-link {
+  margin-left: -1px;
+}
+
+#accordion .card .card-body .pagination li.page-item:last-child .page-link, #accordion .card .card-body .pagination li.page-item:first-child .page-link {
+  border-radius: 0;
+}
+
+#accordion .card .card-body .pagination li.page-item a {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
+
+#accordion .card .card-body .pagination li.page-item a span {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .blog-sidebar-posts .sidebar .best-hits {
@@ -1245,4 +1289,47 @@ body {
 .footer a.social i.fa-github {
   top: 6px;
   left: 7px;
+}
+
+.pages {
+  margin-top: 20px;
+}
+
+.pages .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.pages .pagination li.page-item {
+  margin-bottom: 1px;
+}
+
+.pages .pagination li.page-item.active .page-link {
+  z-index: 0;
+}
+
+.pages .pagination li.page-item:first-child .page-link {
+  margin-left: -1px;
+}
+
+.pages .pagination li.page-item:last-child .page-link, .pages .pagination li.page-item:first-child .page-link {
+  border-radius: 0;
+}
+
+.pages .pagination li.page-item a {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.pages .pagination li.page-item a span {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }

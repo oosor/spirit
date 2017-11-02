@@ -60,19 +60,21 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(4);
 
 
 /***/ }),
-/* 1 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86,14 +88,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ViewGreekRu = function () {
-    function ViewGreekRu() {
-        _classCallCheck(this, ViewGreekRu);
+var ViewBible = function () {
+    function ViewBible() {
+        _classCallCheck(this, ViewBible);
 
         this.init();
     }
 
-    _createClass(ViewGreekRu, [{
+    _createClass(ViewBible, [{
         key: 'init',
         value: function init() {
             this.clickWord();
@@ -456,16 +458,10 @@ var ViewGreekRu = function () {
         }
     }]);
 
-    return ViewGreekRu;
+    return ViewBible;
 }();
 
-new ViewGreekRu();
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+new ViewBible();
 
 /***/ })
 /******/ ]);

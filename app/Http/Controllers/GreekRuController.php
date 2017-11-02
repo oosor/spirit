@@ -10,6 +10,7 @@ use App\BibleSimphonyWord;
 use App\BibleWordsGreek;
 use App\BibleWordsRu;
 use Illuminate\Http\Request;
+use App\Src\Navigation;
 
 class GreekRuController extends Controller
 {
@@ -28,9 +29,16 @@ class GreekRuController extends Controller
         $data = BibleBook::where(['ot_nt' => $otNt, 'book' => $book, 'chapter' => $chapter])->first()
             ?? abort(404);
 
+        $pagination = new Navigation("BibleBook");
+        //return $pagination->getPrevNextLinks($data);
+        //return json_encode($pagination->getNamePagesLinks());
+
+
         return view('viewGreekRus', [
             'data'      => $data,
-            'CONST'     => GreekRuController::getConst(),
+            'CONST'     => Navigation::getConst(),
+            'pagination'=> $pagination->getPrevNextLinks($data),
+            'navigation'=> $pagination->getNamePagesLinks(),
             'property'  => [
                 'ot_nt'     => $otNt,
                 'book'      => $book,
@@ -77,7 +85,22 @@ class GreekRuController extends Controller
         $chapter = $request->chapter ? $request->chapter : 1;
         $cn = $request->cn ? $request->cn : 0;
 
-        $data = BibleBook::where(['ot_nt' => $otNt, 'book' => $book, 'chapter' => $chapter])->get();
+        $pagination = new Navigation("BibleBook");
+
+        $data = BibleBook::where(['ot_nt' => $otNt, 'book' => $book, 'chapter' => $chapter])->first();
+
+        if($request->view)
+            return ['chapter'   => view('blocks.loads.greekRus', [
+                'data'              => $data
+                ])->render(),
+                'pagination'    => view('blocks.paginator.paginator1', [
+                    'pagination'    => $pagination->getPrevNextLinks($data)
+                ])->render(),
+                'links'         => view('blocks.loads.otherLinks', [
+                    'data'              => $data,
+                    'CONST'     => Navigation::getConst(),
+                ])->render()
+            ];
 
         return $data;
     }
@@ -140,66 +163,4 @@ class GreekRuController extends Controller
         ];
     }
 
-    static function getConst() {
-        /*//[46 => 'Мал'
-        //'76' => 'Евр'
-        //51 => Мф
-        //67 => Еф,
-        //77 => Дан(Ф)  -------------
-        //78 => Дан
-        //
-        //
-        //28 => Ис
-        //30 => Плач
-        //31 => Посл.Иер
-        // => Вар
-        //34 => Дан(Ф)
-        //35 => Ос
-        //15 => Езд
-        //18 => Тов
-        //19 => Иудифь
-        //Быт => 1
-        //5 => Втор
-        //8 => Руфь
-        //20 => Есф
-        //24 => Еккл
-        //25 => Песн
-        //];*/
-        $BOOK_LINKS_GREEK = [
-            'Gen', 'Ex', 'Le', 'Nu', 'De', '', '', 'Ru', '', '', '', '', '', '',
-            'Ezr', '', '', 'Tov', 'Judith', 'Es', '', '', '',
-            'Ec', 'SS', '', '', 'Isa', '', 'Lam', 'ep_Ieremiya',
-            'Var', 'Var', 'Da_F', /*'Da',*/ 'Hos', 'Joel',
-            'Amos', 'Obad', 'Jon', 'Mic', 'Nah', 'Hab', 'Zeph', 'Hag', 'Zech', 'Mal',
-            '', '', '', '',
-            'Mt', 'Mk', 'Lk', 'Jn', 'Acts', 'Jas', '1Pet', '2Pet', '1Jn', '2Jn',
-            '3Jn', 'Jude', 'Rom', '1Cor', '2Cor', 'Gal', 'Eph', 'Phil', 'Col', '1Thes',
-            '2Thes', '1Tim', '2Tim', 'Tit', 'Phlm', 'Heb','Rev', 'Da'];
-
-        $BOOK_NAMES_GREEK = [
-            'Быт', 'Исх', 'Лев', 'Чис','Втор', '', '', 'Руфь', '', '', '', '', '', '',
-            'Езд', '', '', 'Тов', 'Иудифь',
-            'Есф', '', '', '', 'Еккл', 'Песн', '', '', 'Ис', '', 'Плач', 'Посл.Иер',
-            'Вар', 'Вар', 'Дан(Ф)', /*'Дан',*/ 'Ос',
-            'Иоил', 'Ам', 'Авд', 'Иона', 'Мих', 'Наум', 'Авв', 'Соф', 'Агг','Зах',
-            'Мал', '', '', '', '', 'Мф', 'Мк', 'Лк', 'Ин', 'Деян', 'Иак', '1Пет', '2Пет', '1Ин',
-            '2Ин','3Ин', 'Иуд', 'Рим', '1Кф', '2Кф', 'Гал', 'Еф', 'Флп', 'Кол',
-            '1Фес','2Фес', '1Тим','2Тим', 'Тит','Флм', 'Евр','Откр', 'Дан'
-        ];
-        $BOOK_NAMES_RU = [
-            'Быт', 'Исх', 'Лев', 'Чис','Втор', 'Нав', 'Суд','Руфь', '1Цар','2Цар', '3Цар','4Цар',
-            '1Пар','2Пар', 'Езд','Неем', '2Езд','Тов', 'Иудифь','Есф', 'Иов','Пс', 'Притч',
-            'Еккл', 'Песн', 'Прем','Сир', 'Ис','Иер', 'Плач','Посл.Иер',
-            'Вар','Иез', 'Дан','Ос', 'Иоил','Ам', 'Авд','Иона', 'Мих','Наум', 'Авв',
-            'Соф', 'Агг','Зах', 'Мал', '1Мак', '2Мак', '3Мак', '3Езд',
-            'Мф', 'Мк','Лк', 'Ин','Деян', 'Иак','1Пет', '2Пет',
-            '1Ин', '2Ин','3Ин', 'Иуд','Рим', '1Кф','2Кф', 'Гал','Еф', 'Флп',
-            'Кол', '1Фес','2Фес', '1Тим','2Тим', 'Тит','Флм', 'Евр','Откр'
-        ];
-        return (object)[
-            'BOOK_LINKS_GREEK'  => $BOOK_LINKS_GREEK,
-            'BOOK_NAMES_GREEK'  => $BOOK_NAMES_GREEK,
-            'BOOK_NAMES_RU'     => $BOOK_NAMES_RU
-        ];
-    }
 }

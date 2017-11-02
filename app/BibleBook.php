@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Http\Controllers\GreekRuController;
+//use App\Http\Controllers\GreekRuController;
+use App\Src\Navigation;
 use Illuminate\Database\Eloquent\Model;
 
 class BibleBook extends Model
@@ -44,7 +45,7 @@ class BibleBook extends Model
 
 
     private function _getShortWord($index) {
-        return GreekRuController::getConst()->BOOK_NAMES_GREEK[($index)-1];
+        return Navigation::getConst()->BOOK_NAMES_GREEK[($index)-1];
     }
 
 }

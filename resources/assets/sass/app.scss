@@ -1060,7 +1060,7 @@ body {
 }
 
 .blog-sidebar-posts .sidebar .updates {
-    padding: 25px 17px;
+    padding: 10px 1px;
     border-radius: 5px;
     border: 1px solid #e2e7f0;
     text-align: center
@@ -1082,15 +1082,63 @@ body {
     display: block;
     margin-top: 12px
 }
+#accordion {
 
-.blog-sidebar-posts .sidebar .updates p {
-    margin-top: 9px;
-    color: #555;
-    margin-bottom: 5px
-}
+    .card-header {
+        padding: 6px 10px;
+        text-align: left;
 
-.blog-sidebar-posts .sidebar .updates a {
-    margin-top: 30px
+        h5 {
+            font-size: 14px;
+        }
+    }
+
+    .card {
+
+        .card-body {
+            padding: 2px;
+            .pagination {
+                padding-left: 1px;
+                margin-bottom: 0;
+                display: flex;
+                flex-wrap: wrap;
+                font-size: 12px;
+                li.page-item {
+
+                    &.active {
+                        .page-link {
+                            z-index: 0;
+                        }
+                    }
+
+                    margin-bottom: 1px;
+
+                    &:first-child {
+                        .page-link {
+                            margin-left: -1px;
+                        }
+                    }
+                    &:last-child, &:first-child {
+                        .page-link {
+                            border-radius: 0;
+                        }
+                    }
+                    a {
+                        padding: 0;
+                        width: 24px;
+                        height: 24px;
+                        text-align: center;
+
+                        span {
+                            position: absolute;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .blog-sidebar-posts .sidebar .best-hits {
@@ -1315,4 +1363,45 @@ body {
 .footer a.social i.fa-github {
     top: 6px;
     left: 7px
+}
+.pages {
+    margin-top: 20px;
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 12px;
+        li.page-item {
+
+            &.active {
+                .page-link {
+                    z-index: 0;
+                }
+            }
+
+            margin-bottom: 1px;
+
+            &:first-child {
+                .page-link {
+                    margin-left: -1px;
+                }
+            }
+            &:last-child, &:first-child {
+                .page-link {
+                    border-radius: 0;
+                }
+            }
+            a {
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+
+                span {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
 }

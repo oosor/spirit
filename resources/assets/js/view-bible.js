@@ -2,7 +2,7 @@
 //const axios = require('axios');
 
 
-class ViewGreekRu {
+class ViewBible {
 
     constructor() {
         this.init();
@@ -169,24 +169,24 @@ class ViewGreekRu {
                 let mdata = '',
                     el = response.data;
                 //response.data.forEach((el) => {
-                    el.a_1.data.forEach((el2, index) => {
-                        mdata += (index == 8) ? '</div>' : '';
-                        if(el2.trim() == '') {
-                            mdata += (index < 9) ? '' : '<br>';
-                        }
-                        else {
-                            mdata += '<div class="word-block">' +
-            '                            <span class="greek-word' + ((!isNaN(el2)) ? (' digit' + (index < 8 ? ' chapter' : (cn != 0 && cn == parseInt(el2, 10)) ? ' active' : '')) : '') + '" data="' + el.a_3.data[index] + '">' + el2 + '</span>' +
-            '                            <span class="ru-word" data="' + this.escapeHtml(el.a_4.data[index]) + '">' + el.a_4.data[index] + '</span>' +
-            '                        </div>';
-                        }
-                    });
+                el.a_1.data.forEach((el2, index) => {
+                    mdata += (index == 8) ? '</div>' : '';
+                    if(el2.trim() == '') {
+                        mdata += (index < 9) ? '' : '<br>';
+                    }
+                    else {
+                        mdata += '<div class="word-block">' +
+                            '                            <span class="greek-word' + ((!isNaN(el2)) ? (' digit' + (index < 8 ? ' chapter' : (cn != 0 && cn == parseInt(el2, 10)) ? ' active' : '')) : '') + '" data="' + el.a_3.data[index] + '">' + el2 + '</span>' +
+                            '                            <span class="ru-word" data="' + this.escapeHtml(el.a_4.data[index]) + '">' + el.a_4.data[index] + '</span>' +
+                            '                        </div>';
+                    }
+                });
                 //});
 
                 let modal = $('<div class="intro" data="' + el.ot_nt + '.' + el.book + '">' +
-        '                        <div class="title">' + mdata +
-        '                        </div>' +
-        '                      </div>');
+                    '                        <div class="title">' + mdata +
+                    '                        </div>' +
+                    '                      </div>');
 
                 this.setMoodalData(modal, '');
             });
@@ -353,8 +353,8 @@ class ViewGreekRu {
         }
         else {
             book = el.closest('.intro')/*.length ? el.closest('.intro') : el.closest('.detal-word')*/,
-            ot_nt_book = book.attr('data').split('.'),
-            cn = el.hasClass('chapter') ? 0 : el.text();
+                ot_nt_book = book.attr('data').split('.'),
+                cn = el.hasClass('chapter') ? 0 : el.text();
         }
 
         axios.post('/ru-bible', (el.hasClass('sim-word') ? {
@@ -455,4 +455,4 @@ class ViewGreekRu {
     }
 
 }
-new ViewGreekRu();
+new ViewBible();
