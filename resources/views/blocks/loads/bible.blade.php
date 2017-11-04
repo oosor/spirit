@@ -1,4 +1,5 @@
 <div class="title">
+    <h5 class="greek-chapter ru-bible" data="{{ $data->ot_nt . '/' . $data->book . '/' . $data->chapter }}">{{ $data->t }}</h5>
 @foreach($data->a->data as $el)
     <div>
     <?php
@@ -15,7 +16,7 @@
         {!! ' ' . $ar !!}
         @continue
     @else
-        {!! ' <a class="simphony-ru">' . $ar . '</a>' !!}
+        {!! ' <a class="simphony-ru no-modal">' . $ar . '</a>' !!}
     @endif
     @endforeach
     </div>

@@ -24,51 +24,84 @@ class Navigation
 
     function getNamePagesLinks() {
 
-        $all = $this->_getModel()::select(['ot_nt', 'book', 'chapter'])->get();
+        if($this->_model == 'BibleBook')
+            $all = $this->_getModel()::select(['ot_nt', 'book', 'chapter'])->get();
+        else if($this->_model == 'BibleRsv')
+            $all = $this->_getModel()::select(['c'])->where('c', '!=', '')->get();
 
         $data = (object)[];
         $data->numberLinks = [];
         $data->bookLinks = [];
         $tmp = '';
+        //return $all;
         foreach($all as $one) {
             $object = $one;
-            $object->name = Navigation::getConst()->BOOK_NAMES_GREEK[array_search($one->book, Navigation::getConst()->BOOK_LINKS_GREEK)];
-            $this->getNumberChapterLinks($object);
-            $object->href = '?ot_nt=' . $one->ot_nt . '&book=' . $one->book . '&chapter=' . $one->chapter;
+            if($this->_model == 'BibleBook') {
+                $object->name = Navigation::getConst()->BOOK_NAMES_GREEK[array_search($one->book, Navigation::getConst()->BOOK_LINKS_GREEK)];
+                $object->href = '?ot_nt=' . $one->ot_nt . '&book=' . $one->book . '&chapter=' . $one->chapter;
 
-            if($tmp != $one->book) {
-                $data->bookLinks[$one->book] = $this->getNumberPagesLinks(clone $object);
-                $data->numberLinks[$one->book] = [];
-                $tmp = $one->book;
+                $ttmp = $one->book;
+                if($tmp != $one->book) {
+                    $data->bookLinks[$one->book] = $this->getNumberPagesLinks(clone $object);
+                    $data->numberLinks[$one->book] = [];
+                    $tmp = $one->book;
+                }
             }
+            else if($this->_model == 'BibleRsv') {
+                $object->name = Navigation::getConst()->BOOK_NAMES_RU[((int)(explode('_', $object->c)[0])) - 1];
+                $object->href = '?book=' . $one->c;
+
+                $ttmp = explode('_', $one->c)[0] . '_';
+                if($tmp != $ttmp) {
+                    $data->bookLinks[$ttmp] = $this->getNumberPagesLinks(clone $object);
+                    $data->numberLinks[$ttmp] = [];
+                    $tmp = $ttmp;
+                }
+            }
+
+            $this->getNumberChapterLinks($object);
+
+
+
 
             //dd($data->bookLinks['Gen']->numberLinks);
 
-            $data->numberLinks[$one->book][] = $object;
+            $data->numberLinks[$ttmp][] = $object;
         }
         //dd($data);
         return $data;
     }
 
     function getNumberPagesLinks($object) {
-        $object->href = '?ot_nt=' . $object->ot_nt . '&book=' . $object->book;
+        if($this->_model == 'BibleBook')
+            $object->href = '?ot_nt=' . $object->ot_nt . '&book=' . $object->book;
+        else if($this->_model == 'BibleRsv')
+            $object->href = '?book=' . $object->c;
+
         $object->numberLinks = [];
         return $object;
     }
 
     function getNumberChapterLinks($object) {
-        $object->href = '?ot_nt=' . $object->ot_nt . '&book=' . $object->book . '&chapter=' . $object->chapter;
+        if($this->_model == 'BibleBook')
+            $object->href = '?ot_nt=' . $object->ot_nt . '&book=' . $object->book . '&chapter=' . $object->chapter;
+        else if($this->_model == 'BibleRsv')
+            $object->href = '?book=' . $object->c;
+
         return $object;
     }
 
     function getPrevNextLinks($activeModel) {
         //$count = Navigation::getConst()->COUNT_CHAPTER_BOOKS[$activeModel->book];
-        $models = $this->_getModel()::select(['ot_nt', 'book', 'chapter'])->where('book', $activeModel->book)->get();
+        if($this->_model == 'BibleBook')
+            $models = $this->_getModel()::select(['ot_nt', 'book', 'chapter'])->where('book', $activeModel->book)->get();
+        else if($this->_model == 'BibleRsv')
+            $models = $this->_getModel()::select(['c'])->where('c', 'like', (explode('_', $activeModel->c)[0] . '_%'))->get();
 
         $data = [];
         foreach ($models as $model) {
             $obj = $model;
-            $obj->active = $activeModel->chapter == $model->chapter ? true : false;
+            $obj->active = ($this->_model == 'BibleBook') ? $activeModel->chapter == $model->chapter : $activeModel->c == $model->c;
             $this->getNumberChapterLinks($obj);
             $data[] = $obj;
         }

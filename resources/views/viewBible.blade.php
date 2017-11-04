@@ -9,7 +9,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('dist/view-bible.js') }}"></script>
+    <script src="{{ asset('dist/view-greek-ru.js') }}"></script>
 @endsection
 
 @section('content')
@@ -27,12 +27,12 @@
                             @include('blocks.paginator.paginator2')
                         </div>
                         <div class="box-other">
-                            {{--@include('blocks.loads.otherLinks')--}}
+                            @include('blocks.loads.otherLinks2')
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 sidebar">
-                    @include('blocks.right.links1')
+                    @include('blocks.right.links2')
                 </div>
             </div>
         </div>

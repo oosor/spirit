@@ -879,77 +879,81 @@ body {
           box-shadow: 0px 0px 4px 1px #E8850C;
 }
 
-.detal-word .ru-bible {
+.detal-word .ru-bible, .intro .ru-bible {
   -webkit-transition: opacity .15s linear;
   transition: opacity .15s linear;
 }
 
-.detal-word .ru-bible:hover {
+.detal-word .ru-bible:hover, .intro .ru-bible:hover {
   cursor: pointer;
   color: #428bca;
   opacity: .8;
 }
 
-.detal-word a {
+.detal-word a, .intro a {
   color: #007bff !important;
   -webkit-transition: opacity .15s linear;
   transition: opacity .15s linear;
 }
 
-.detal-word a:hover {
+.detal-word a:hover, .intro a:hover {
   cursor: pointer;
   color: #428bca;
   opacity: .8;
   text-decoration: none;
 }
 
-.detal-word a.simphony-ru {
+.detal-word a.simphony-ru, .intro a.simphony-ru {
   color: #868e96 !important;
 }
 
-.detal-word a.simphony-ru:hover {
+.detal-word a.simphony-ru.no-modal, .intro a.simphony-ru.no-modal {
+  font-weight: 400;
+}
+
+.detal-word a.simphony-ru:hover, .intro a.simphony-ru:hover {
   color: #428bca !important;
 }
 
-.detal-word .word-abr {
+.detal-word .word-abr, .intro .word-abr {
   color: #E8850C;
 }
 
-.detal-word .word-abr:hover {
+.detal-word .word-abr:hover, .intro .word-abr:hover {
   cursor: pointer;
   opacity: .8;
 }
 
-.detal-word .remove {
+.detal-word .remove, .intro .remove {
   position: absolute;
   right: 0;
   margin: 10px 12px;
   color: #ccc;
 }
 
-.detal-word .remove:hover {
+.detal-word .remove:hover, .intro .remove:hover {
   opacity: .8;
   cursor: pointer;
 }
 
-.detal-word .word-bold {
+.detal-word .word-bold, .intro .word-bold {
   font-weight: bold;
 }
 
-.detal-word .ru-word {
+.detal-word .ru-word, .intro .ru-word {
   font-weight: bold;
 }
 
-.detal-word footer {
+.detal-word footer, .intro footer {
   border-top: 1px solid #dddddd;
   margin-top: 10px;
 }
 
-.detal-word blockquote {
+.detal-word blockquote, .intro blockquote {
   margin-bottom: 0;
 }
 
-.detal-word .symphony, .detal-word .other {
+.detal-word .symphony, .detal-word .other, .intro .symphony, .intro .other {
   font-weight: bold;
 }
 
@@ -978,6 +982,12 @@ body {
 .box-other .item-other {
   display: inline-block;
   color: #555555;
+}
+
+.box-other .other-2-links {
+  border-top: 1px solid #cccccc;
+  margin-top: 10px;
+  padding-top: 20px;
 }
 
 .blog-sidebar-posts .post .continue-reading {
@@ -1016,7 +1026,7 @@ body {
   font-weight: 500;
   text-transform: uppercase;
   display: block;
-  margin-top: 12px;
+  margin-bottom: 10px;
 }
 
 #accordion .card-header {

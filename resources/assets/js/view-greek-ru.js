@@ -158,6 +158,10 @@ class ViewGreekRu {
 
             let params = element.attr('data').split('/'),
                 cn = element.hasClass('chapter') ? 0 : element.text();
+            if(params[0] == '') {
+                this.setMoodalData($('<h6>Подстрочный перевод отсутствует</h6>'), '');
+                return true;
+            }
             axios.post('/chapter-greek', {
                 code: element.attr('data'),
                 ot_nt: params[0],
@@ -274,6 +278,11 @@ class ViewGreekRu {
 
             let element = $(event.target);
 
+            if(activePoper) {
+                this.destroyPopper(activePoper);
+                activePoper = null;
+            }
+
             axios.post('/ru-simphony', {
                 word: element.text()
             }).then(response => {
@@ -294,15 +303,38 @@ class ViewGreekRu {
                     '                  <blockquote class="card-body">' +
                     '                    <p class="word-bold">' + response.data.word.word + ' (' + response.data.word.cifral + ')</p>' +
                     '                    <small>' + links + '</small>' +
-                    '                    <footer>' +
-                    '                      <small class="text-muted">см.т. ' + other +
-                    '                      </small>' +
+                    '                    <footer>' + (other.length ? ('<small class="text-muted">см.т. ' + other + '</small>') : '') +
                     '                    </footer>' +
                     '                  </blockquote>' +
                     '                </div>');
 
+                if(element.hasClass('no-modal')) {
 
-                this.setMoodalData(modal, '');
+                    $('body').append(modal);
+
+                    $('.detal-word').on('click', '.remove', () => {
+                        this.destroyPopper(activePoper);
+                        activePoper = null;
+                    });
+
+                    activePoper = new Popper(
+                        element, modal, {
+                            placement: 'bottom',
+                            modifiers: {
+                                flip: {
+                                    behavior: ['left', 'bottom', 'top', 'right']
+                                },
+                                preventOverflow: {
+                                    boundariesElement: 'scrollParent',
+                                },
+                            },
+                        }
+                    );
+
+                }
+                else {
+                    this.setMoodalData(modal, '');
+                }
 
             });
         }).on('click', 'a.page-link', (event) => {
@@ -320,15 +352,15 @@ class ViewGreekRu {
             param.view = true;
             $('.intro').css({opacity: '.4'});
 
-            axios.post('/greek-template', param).then(response => {
+            axios.post(element.hasClass('ru-link') ? '/ru-template' : '/greek-template', param).then(response => {
                 $('.intro').css({opacity: 1}).attr('data', param.ot_nt + '.' + param.book).html(response.data.chapter);
                 $('.pages').html(response.data.pagination);
                 $('.box-other').html(response.data.links);
                 $('html, body').animate({scrollTop: $('.intro').offset().top - 85}, 500);
                 $('#accordion').find('.collapse.show').removeClass('show');
                 $('#accordion').find('li.active').removeClass('active');
-                $('#colapse-' + param.book).addClass('show').find('span').each((index, el) => {
-                    if($(el).text() == param.chapter)
+                $('#colapse-' + (element.hasClass('ru-link') ? (param.book.split('_')[0] + '_') : param.book)).addClass('show').find('span').each((index, el) => {
+                    if($(el).text() == (element.hasClass('ru-link') ? (+param.book.split('_')[1]) : param.chapter))
                         $(el).closest('li.page-item').addClass('active');
                 });
 

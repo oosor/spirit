@@ -60,21 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+__webpack_require__(1);
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -312,6 +310,11 @@ var ViewBible = function () {
 
                 var element = $(event.target);
 
+                if (activePoper) {
+                    _this.destroyPopper(activePoper);
+                    activePoper = null;
+                }
+
                 axios.post('/ru-simphony', {
                     word: element.text()
                 }).then(function (response) {
@@ -329,7 +332,29 @@ var ViewBible = function () {
 
                     var modal = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold">' + response.data.word.word + ' (' + response.data.word.cifral + ')</p>' + '                    <small>' + links + '</small>' + '                    <footer>' + '                      <small class="text-muted">см.т. ' + other + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
 
-                    _this.setMoodalData(modal, '');
+                    if (element.hasClass('no-modal')) {
+
+                        $('body').append(modal);
+
+                        $('.detal-word').on('click', '.remove', function () {
+                            _this.destroyPopper(activePoper);
+                            activePoper = null;
+                        });
+
+                        activePoper = new Popper(element, modal, {
+                            placement: 'bottom',
+                            modifiers: {
+                                flip: {
+                                    behavior: ['left', 'bottom', 'top', 'right']
+                                },
+                                preventOverflow: {
+                                    boundariesElement: 'scrollParent'
+                                }
+                            }
+                        });
+                    } else {
+                        _this.setMoodalData(modal, '');
+                    }
                 });
             }).on('click', 'a.page-link', function (event) {
 
@@ -462,6 +487,12 @@ var ViewBible = function () {
 }();
 
 new ViewBible();
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

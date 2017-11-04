@@ -128,15 +128,15 @@ class GreekRuController extends Controller
     function ruBible(Request $request) {
 
         if($request->is) {
-            $otNt = $request->ot_nt ? $request->ot_nt : 'OT';
-            $book = $request->book ? $request->book : 'Gen';
-            $chapter = $request->chapter ? $request->chapter : 1;
+            //$otNt = $request->ot_nt ? $request->ot_nt : 'OT';
+            $book = $request->book ? $request->book : '01_001';
+            //$chapter = $request->chapter ? $request->chapter : 1;
             $cn = $request->cn ? $request->cn : 0;
 
             $data = BibleRsv::where([
-                ['ot_nt', $otNt],
-                ['book', 'like', $book.'%'],
-                ['chapter', $chapter]
+                /*['ot_nt', $otNt],*/
+                ['book', $book]
+                /*['chapter', $chapter]*/
             ]);
         }
         else {

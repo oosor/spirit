@@ -31,7 +31,7 @@ Route::post('/symphony-greek-word', 'GreekRuController@symphonyGWord');
 Route::post('/ru-bible', 'GreekRuController@ruBible');
 Route::post('/ru-simphony', 'GreekRuController@ruSimphony');
 Route::post('/greek-template', 'GreekRuController@chapterGreek');
-
+Route::post('/ru-template', 'BibleController@chapterRu');
 
 
 Route::post('/abr-word', 'GreekRuController@abrWord');

@@ -1,7 +1,6 @@
 <div class="updates">
-    <i class="fa fa-rss"></i>
     <strong>
-        Free blog updates
+        Содержание
     </strong>
 
     <div id="accordion">
