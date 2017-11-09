@@ -21,16 +21,22 @@ class BibleController extends Controller
 
 
         $pagination = new Navigation("BibleRsv");
-        //return $pagination->getPrevNextLinks($data);
-        //return json_encode($pagination->getNamePagesLinks());
 
-        //return $pagination->getNamePagesLinks();
+
+        $paginator = $pagination->getNamePagesLinks();
+
+        $pag_1 = $pagination->getPrevNextLinks($data);
+
+        $pagination = new Navigation("BibleBook");
+
+        $paginator->otherBookLinks = $pagination->getNamePagesLinks();
 
         return view('viewBible', [
+            'is'        => 'ru',
             'data'      => $data,
             'CONST'     => Navigation::getConst(),
-            'pagination'=> $pagination->getPrevNextLinks($data),
-            'navigation'=> $pagination->getNamePagesLinks(),
+            'pagination'=> $pag_1,
+            'navigation'=> $paginator,
             'property'  => [
                 //'ot_nt'     => $otNt,
                 'book'      => $book,

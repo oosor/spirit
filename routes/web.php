@@ -15,11 +15,15 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+//Route::get('/tmp', 'DashboardController@tmp');
+
 
 Route::get('/view', 'GreekRuController@index');
 Route::get('/bible', 'BibleController@index');
-
-
+Route::get('/simphony-greek', 'SimphonyController@index');
+Route::get('/simphony-ru', 'SimphonyController@ruSimphony');
+Route::get('/simphony-greek-word', 'SimphonyController@greekSimphonyWord');
+Route::get('/comment', 'CommentController@index');
 
 
 // get datas
@@ -35,3 +39,10 @@ Route::post('/ru-template', 'BibleController@chapterRu');
 
 
 Route::post('/abr-word', 'GreekRuController@abrWord');
+
+Route::post('/simphony-_greek', 'SimphonyController@greekViewRender');
+Route::post('/simphony-_ru', 'SimphonyController@ruViewRender');
+Route::post('/simphony-_greek-word', 'SimphonyController@greekWordViewRender');
+
+Route::post('/comment-book', 'CommentController@commentBook');
+Route::post('/comment-data', 'CommentController@commentData');

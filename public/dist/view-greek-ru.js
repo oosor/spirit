@@ -272,43 +272,6 @@ var ViewGreekRu = function () {
                     var modal = $('<div class="card detal-word">' + '                  <div class="remove"><i class="fa fa-close"></i></div>' + '                  <blockquote class="card-body">' + '                    <p class="word-bold" style="font-family: GrkV">' + response.data.word.word + '</p>' + '                    <small>' + response.data.word.detal + '</small>' + '                    <footer>' + '                      <small class="text-muted">' + '                        ' + (other.length != 0 ? other : '') + '                      </small>' + '                    </footer>' + '                  </blockquote>' + '                </div>');
 
                     _this.setMoodalData(modal, '');
-
-                    $('.detal-word').on('click', '.word-abr', function (event2) {
-
-                        if (apoper2) {
-                            apoper2.destroy();
-                            apoper2 = null;
-                            $('.poper-full-click').remove();
-                        }
-                        var element2 = $(event2.target);
-
-                        axios.post('/abr-word', {
-                            word: element2.text()
-                        }).then(function (response) {
-
-                            if (!response.data) return true;
-                            var poper2 = $('<div class="card poper-full-click" style="z-index:99999">' + '                  <blockquote class="card-body">' + '                      <small class="text-muted"><strong>' + response.data.krosh + '</strong> - ' + response.data.text + '                      </small>' + '                  </blockquote>' + '                </div>');
-                            $('body').append(poper2);
-
-                            $('body').on('click', '#wordModal', function () {
-                                if (apoper2) {
-                                    apoper2.destroy();
-                                    apoper2 = null;
-                                }
-                                $('.poper-full-click').remove();
-                                $('body').off('click', '#wordModal');
-                            });
-
-                            apoper2 = new Popper(element2, poper2, {
-                                placement: 'bottom',
-                                modifiers: {
-                                    flip: {
-                                        behavior: ['left', 'bottom', 'top', 'right']
-                                    }
-                                }
-                            });
-                        });
-                    });
                 });
             }).on('click', '.simphony-ru', function (event) {
 
@@ -392,6 +355,41 @@ var ViewGreekRu = function () {
                     } catch (e) {}
                 });
                 return false;
+            }).on('click', '.word-abr', function (event2) {
+
+                if (apoper2) {
+                    apoper2.destroy();
+                    apoper2 = null;
+                    $('.poper-full-click').remove();
+                }
+                var element2 = $(event2.target);
+
+                axios.post('/abr-word', {
+                    word: element2.text()
+                }).then(function (response) {
+
+                    if (!response.data) return true;
+                    var poper2 = $('<div class="card poper-full-click" style="z-index:99999">' + '                  <blockquote class="card-body">' + '                      <small class="text-muted"><strong>' + response.data.krosh + '</strong> - ' + response.data.text + '                      </small>' + '                  </blockquote>' + '                </div>');
+                    $('body').append(poper2);
+
+                    $('body').on('click', '#wordModal, .poper-full-click', function () {
+                        if (apoper2) {
+                            apoper2.destroy();
+                            apoper2 = null;
+                        }
+                        $('.poper-full-click').remove();
+                        $('body').off('click', '#wordModal');
+                    });
+
+                    apoper2 = new Popper(element2, poper2, {
+                        placement: 'bottom',
+                        modifiers: {
+                            flip: {
+                                behavior: ['left', 'bottom', 'top', 'right']
+                            }
+                        }
+                    });
+                });
             });
         }
     }, {

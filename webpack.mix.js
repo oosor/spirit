@@ -23,7 +23,8 @@ mix
     //.copyDirectory('node_modules/ionicons/dist/fonts', 'public/assets/fonts')
     //.js('resources/assets/js/app.js', 'public/dist')
     //.js('resources/assets/js/view-greek-ru.js', 'public/dist')
-    .js('resources/assets/js/view-bible.js', 'public/dist')
+    //.js('resources/assets/js/simphony.js', 'public/dist')
+    .js('resources/assets/js/comment.js', 'public/dist')
     .sass('resources/assets/sass/app.scss', 'public/dist')
     .options({
         processCssUrls: false

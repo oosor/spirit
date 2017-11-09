@@ -30,15 +30,21 @@ class GreekRuController extends Controller
             ?? abort(404);
 
         $pagination = new Navigation("BibleBook");
-        //return $pagination->getPrevNextLinks($data);
-        //return json_encode($pagination->getNamePagesLinks());
 
+        $paginator = $pagination->getNamePagesLinks();
+
+        $pag_1 = $pagination->getPrevNextLinks($data);
+
+        $pagination = new Navigation("BibleRsv");
+
+        $paginator->otherBookLinks = $pagination->getNamePagesLinks();
 
         return view('viewGreekRus', [
+            'is'        => 'greek',
             'data'      => $data,
             'CONST'     => Navigation::getConst(),
-            'pagination'=> $pagination->getPrevNextLinks($data),
-            'navigation'=> $pagination->getNamePagesLinks(),
+            'pagination'=> $pag_1,
+            'navigation'=> $paginator,
             'property'  => [
                 'ot_nt'     => $otNt,
                 'book'      => $book,

@@ -177,7 +177,7 @@
 }
 
 .dropdown-menu {
-    font-size: .9rem
+    font-size: 13px
 }
 
 @media (min-width:992px) {
@@ -254,6 +254,13 @@
 }
 
 @media (min-width:992px) {
+    .navbar {
+        position: fixed !important;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
     .dropdown-submenu .dropdown-menu {
         left: 98%;
         top: -2px;
@@ -270,6 +277,14 @@
 }
 
 @media (min-width:768px) {
+    .right-line {
+        border-right: 1px solid #d9d9d9
+    }
+    .empty-block {
+        height: 59px;
+        display: block;
+        border-bottom: 1px solid #d9d9d9;
+    }
     .dropdown-extend-menu {
         padding: 20px 30px
     }
@@ -277,7 +292,9 @@
 
 @media (min-width:768px) {
     .dropdown-extend-menu .dropdown-item {
-        margin: 5px 0
+        margin: 0;
+        padding: .25rem 4px;
+        padding: 0 10px;
     }
 }
 
@@ -288,6 +305,10 @@
 }
 
 @media (max-width:767px) {
+    .bottom-line {
+        border-bottom: 1px solid #d9d9d9;
+        display: block;
+    }
     .dropdown-extend-menu .dropdown-item i {
         display: none
     }
@@ -384,8 +405,7 @@ body {
     }
     .navbar-dark .dropdown-menu .dropdown-item {
         color: #555;
-        padding: 4px 1.5rem;
-        padding-right: 30px
+        padding: 2px 10px;
     }
     .navbar-dark .dropdown-menu .dropdown-item:active {
         background-color: #f7f7f9
@@ -891,6 +911,9 @@ body {
     font-family: GrkV;
     src: url(../fonts/GrkV.ttf);
 }
+.greek-font {
+    font-family: GrkV;
+}
 .intro {
     margin-top: 18px;
     font-size: 15px;
@@ -944,6 +967,9 @@ body {
     .active {
         box-shadow: 0px 0px 4px 1px #E8850C;
     }
+}
+.simphony-class.active {
+    box-shadow: 0px 0px 4px 1px #E8850C;
 }
 .detal-word, .intro {
 
@@ -1371,6 +1397,19 @@ body {
 .footer a.social i.fa-github {
     top: 6px;
     left: 7px
+}
+
+.simphony-block {
+    margin-bottom: 20px;
+    p {
+        margin-bottom: 0;
+    }
+}
+.h-padding {
+    padding: 0 15px;
+}
+.no-padding {
+    padding: 0;
 }
 .pages {
     margin-top: 20px;
