@@ -2,66 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\BibleComment;
+use App\Src\Navigation;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
 
-    public function __construct()
-    {
 
+    function index(Request $request) {
+
+
+        return view('dashboard', [
+            'is'                => 'home',
+            'navigation'        => $this->getPaginator(),
+        ]);
     }
 
-    function tmp() {
-
-        /*$bible = BibleComment::find(2);
-        return $bible->text;*/
-
-        /*$data = scandir('../../../parse/S/', 0);
-
-        foreach ($data as $key=>$_data) {
-            if($key < 2) continue;
-            if(count(explode('_', $_data)) == 1) continue;
+    function about(Request $request) {
 
 
-            $dd = file_get_contents("http://localhost/pro/parse/S/".$_data);
+        return view('about', [
+            'is'                => 'about',
+            'navigation'        => $this->getPaginator(),
+        ]);
+    }
 
 
-            //return explode('.', $_data)[0];
-            $_dd = explode('<tr><td>', $dd)[1];
-            $_dd = explode('</td></tr>', $_dd)[0];
 
-            //HREF="../RSV/01_001.htm#1"
-            $pattern = "/HREF=\"\.\.\/(\w+)\/(\w+)\.\w+\#([\d+\-]+)\"/i";
-            $replacement = "data=\"\${1}.\${2}.\${3}\"";
-            $_dd = preg_replace($pattern, $replacement, $_dd);
+    function getPaginator() {
+        $pagination = new Navigation("BibleRsv");
 
-            $pattern = [
-                "/onmouseover=\"[^\"]+\"\s?/i",
-                "/onmouseout=\"[^\"]+\"\s?/i",
-                "/ ALIGN=\"JUSTIFY\"/i"
-                ];
-            $replacement = "";
-            $_dd = preg_replace($pattern, $replacement, $_dd);
+        $paginator = $pagination->getNamePagesLinks();
 
+        $pagination = new Navigation("BibleBook");
 
-            /*$_dd = str_replace([' ALIGN="JUSTIFY"'], "", $_dd);
-            $_dd = str_replace([' ALIGN="JUSTIFY"'], "", $_dd);*/
-            //return view('tmp', ['data' => $_dd]);
+        $paginator->otherBookLinks = $pagination->getNamePagesLinks();
 
-            /*$_dd = iconv('cp1251', 'utf8', $_dd);
-
-            $bible = new BibleComment();
-            //return $_dd;
-            $bible->code = explode('.', $_data)[0];
-            $bible->text = $_dd/*json_encode([$_dd], JSON_UNESCAPED_UNICODE)*/
-            //$bible->save();*/
-
-        //}
-
-
-        return 'ok';
+        return $paginator;
     }
 
 }

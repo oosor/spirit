@@ -15,62 +15,24 @@
 @section('content')
 
 @include('blocks.header')
-
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">В начале было Слово, и Слово было у Бога, и Слово было Бог</h1>
+    </div>
+</div>
 <div class="spacial-features">
     <section class="container">
         <div class="row">
             <div class="col-12">
                 <div class="header">
-                    <h2>Complete control over your company</h2>
+                    <h2></h2>
                     <p>
-                        Spacial has both a web app and an android app to make your website easy and always available.
+                        Цель этого проекта дать русскоговорящим христианам доступ к тексту максимально приближенному к первоначальному. Поэтому, подстрочный перевод книг производится с тех языков, на которых эти книги были изначально написаны, либо с языков, на которых написаны их наиболее древние и достоверные переводы (если текст на языке оригинала утерян). Это греческий, еврейский и латинский языки.
                     </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="feature">
-                    <h3>
-                        Have conversations with your friends
-                    </h3>
                     <p>
-                        Spacial is the perfect solution for web developers and designers. You can get an awesome website for your best projects and clients, and also get great support.
+                        В силу того, что во времена Иисуса и первых христиан перевод книг Ветхого Завета на греческий язык был распространён и цитировался при догматическом обосновании тех или иных позиций, я по возможности представлю перевод канонических книг Ветхого Завета также и с Септуагинты.
                     </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="feature">
-                    <h3>
-                        Keep your information private & secure
-                    </h3>
-                    <p>
-                        Spacial is designed to make showing off your best projects extremely fast and simple. There are many ways to configure. Just go to the source, make changes.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="feature">
-                    <h3>
-                        Explore new possibilities every day
-
-                        <span class="badge-new">New</span>
-                    </h3>
-                    <p>
-                        Spacial has both a web app and an android app to make your website easy and always available. It offers you all the designs in collaboration with smart people.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="feature">
-                    <h3>
-                        Enjoy a whole new set of options
-                    </h3>
-                    <p>
-                        Spacial is designed to make showing off your best projects extremely fast and simple. There are many ways to configure, just go to the source and configure.
-                    </p>
+                    <h4 style="color:#428bca">Весь материал был взят с ресурса <a href="http://bible.in.ua" target="_blank">bible.in.ua</a></h4>
                 </div>
             </div>
         </div>

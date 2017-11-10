@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent {{--fixed-top--}}" role="navigation">
     <div class="container no-override">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="https://spiritfount.com">
             <img src="images/logo-alt-w.png" class="d-none d-lg-inline mr-2 w-25" />
-            Spacial
+            spiritfount.com
         </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
             <span class="navbar-toggler-icon"></span>
@@ -10,12 +10,12 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a href="#" class="nav-link">
+                <li class="nav-item{{ $is == 'home' ? ' active' : '' }}">
+                    <a href="{{ asset('') }}" class="nav-link">
                         Главная
                     </a>
                 </li>
-                <li class="nav-item dropdown dropdown-extend">
+                <li class="nav-item dropdown dropdown-extend{{ $is == 'greek' ? ' active' : '' }}">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         Подстрочный перевод
                         <i class="fa fa-chevron-down"></i>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown dropdown-extend">
+                <li class="nav-item dropdown dropdown-extend{{ $is == 'ru' ? ' active' : '' }}">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         Синодальный перевод
                         <i class="fa fa-chevron-down"></i>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown{{ $is == 'simphony-greek' || $is == 'simphony-ru' || $is == 'simphony-greek-word' ? ' active' : '' }}">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         Симфонии
                         <i class="fa fa-chevron-down"></i>
@@ -121,7 +121,7 @@
                         <a class="dropdown-item" href="{{ asset('simphony-greek-word') }}">Симфония греческих словарных форм</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown dropdown-extend">
+                <li class="nav-item dropdown dropdown-extend{{ $is == 'comment' ? ' active' : '' }}">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         Комментарий
                         <i class="fa fa-chevron-down"></i>
@@ -170,9 +170,9 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
-                        Shop
+                <li class="nav-item{{ $is == 'about' ? ' active' : '' }}">
+                    <a href="{{ asset('about') }}" class="nav-link">
+                        О программе
                     </a>
                 </li>
             </ul>

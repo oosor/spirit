@@ -386,14 +386,18 @@ body {
 }
 
 .navbar-dark .navbar-brand {
-    font-size: 21px;
+    font-size: 12px;
     letter-spacing: .5px;
     color: #fff;
     -webkit-transition: color .2s linear;
     -moz-transition: color .2s linear;
     -ms-transition: color .2s linear;
     -o-transition: color .2s linear;
-    transition: color .2s linear
+    transition: color .2s linear;
+
+    img {
+        height: 52px
+    }
 }
 
 @media (min-width:992px) {
@@ -412,6 +416,14 @@ body {
     }
 }
 
+#navbar-collapse {
+    ul {
+        li.active {
+            border-bottom: 2px solid #428bca;
+        }
+    }
+}
+
 .navbar-dark .nav-item .nav-link {
     color: #dadada;
     font-weight: 500;
@@ -426,7 +438,7 @@ body {
 @media (min-width:992px) {
     .navbar-dark .nav-item .nav-link {
         margin: 0 9px;
-        padding: 32px 10px
+        padding: 20px 10px
     }
 }
 
@@ -671,7 +683,7 @@ body {
 
 
 .header-hero {
-    background: url(../images/unsplash/michael-benz-189971.jpg);
+    background: url(../images/bg-top.jpg);
     background-size: cover;
     background-position: center 0;
     padding-top: 270px;
@@ -835,7 +847,7 @@ body {
 }
 
 .blog-sidebar-posts {
-    margin-top: 130px
+    margin-top: 30px
 }
 
 .blog-sidebar-posts .post {
@@ -1091,6 +1103,10 @@ body {
         margin-top: 70px;
         text-align: center
     }
+}
+
+.sidebar {
+    margin-top: 18px;
 }
 
 .blog-sidebar-posts .sidebar .updates {
@@ -1449,6 +1465,19 @@ body {
                     transform: translate(-50%, -50%);
                 }
             }
+        }
+    }
+}
+.breadcrumbs {
+    overflow: hidden;
+    padding: 10px 0 6px;
+    border-bottom: solid 1px #eee;
+    background: rgba(222,222,222,.2);
+    .container {
+        h1 {
+            color: #666;
+            font-size: 22px;
+            margin-top: 8px;
         }
     }
 }

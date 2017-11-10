@@ -3,7 +3,7 @@
         <div class="row text-center">
             <div class="col-12 fadeInScaleDown">
                 <h2>
-                    Header Transparent Fixed Dark
+                    ДУХОВНОЕ ДУХОВНЫМ
                 </h2>
             </div>
         </div>

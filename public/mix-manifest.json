@@ -1,4 +1,14 @@
 {
+    "/dist/app.js": "/dist/app.js",
+    "/dist/app.css": "/dist/app.css",
+    "/dist/view-greek-ru.js": "/dist/view-greek-ru.js",
+    "/dist/simphony.js": "/dist/simphony.js",
     "/dist/comment.js": "/dist/comment.js",
-    "/dist/app.css": "/dist/app.css"
+    "/assets/lib/bootstrap.min.css": "/assets/lib/bootstrap.min.css",
+    "/assets/lib/bootstrap.min.js": "/assets/lib/bootstrap.min.js",
+    "/assets/lib/font-awesome.min.css": "/assets/lib/font-awesome.min.css",
+    "/assets/lib/ionicons.min.css": "/assets/lib/ionicons.min.css",
+    "/assets/lib/popper.min.js": "/assets/lib/popper.min.js",
+    "/assets/lib/jquery.min.js": "/assets/lib/jquery.min.js",
+    "/assets/lib/axios.min.js": "/assets/lib/axios.min.js"
 }

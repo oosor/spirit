@@ -16,12 +16,12 @@ class SimphonyController extends Controller
         $word = $request->word ?? null;
 
         $data = BibleWordsGreek::where('code', $word)->get();
-        if(count($data) == 0) abort(404);
+        //if(count($data) == 0) abort(404);
         //return ($data);
 
         return view('simphonyGreek', [
             'is'                => 'simphony-greek',
-            'data'              => $data,
+            'data'              => count($data) > 0 ? $data : null,
             'navigation'        => $this->getPaginator(),
             'links'             => Navigation::getGreekSimphony()
         ]);
@@ -32,12 +32,12 @@ class SimphonyController extends Controller
         $word = $request->word ?? null;
 
         $data = BibleWordsRu::where('code', $word)->get();
-        if(count($data) == 0) abort(404);
+        //if(count($data) == 0) abort(404);
 
 
         return view('simphonyGreek', [
             'is'                => 'simphony-ru',
-            'data'              => $data,
+            'data'              => count($data) > 0 ? $data : null,
             'navigation'        => $this->getPaginator(),
             'links'             => Navigation::getRuSimphony()
         ]);
@@ -74,11 +74,11 @@ class SimphonyController extends Controller
         $word = $request->word ?? null;
 
         $data = BibleSimphonyGword::where('code', $word)->get();
-        if(count($data) == 0) abort(404);
+        //if(count($data) == 0) abort(404);
 
         return view('simphonyGreek', [
             'is'                => 'simphony-greek-word',
-            'data'              => $data,
+            'data'              => count($data) > 0 ? $data : null,
             'navigation'        => $this->getPaginator(),
             'links'             => Navigation::getGreekSimphonyWord()
         ]);

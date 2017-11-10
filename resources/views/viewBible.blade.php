@@ -15,6 +15,11 @@
 @section('content')
 
     @include('blocks.header')
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">СИНОДАЛЬНЫЙ ПЕРЕВОД БИБЛИИ</h1>
+        </div>
+    </div>
     <div class="blog-sidebar-posts">
         <div class="container">
             <div class="row">

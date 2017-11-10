@@ -3,93 +3,80 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="title">
-                    About spacial
+                    Меню
                 </div>
                 <ul class="menu">
                     <li>
-                        <a href="#">Home Pages</a>
+                        <a href="{{ asset('') }}">Главная</a>
                     </li>
                     <li>
-                        <a href="#">Theme Features</a>
+                        <a href="{{ asset('view') }}">Подстрочный перевод</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="{{ asset('bible') }}">Синодальный перевод</a>
                     </li>
                     <li>
-                        <a href="#">StoreFront</a>
+                        <a href="{{ asset('comment?book=01_000') }}">Комментарий</a>
                     </li>
                     <li>
-                        <a href="#">Portfolio</a>
+                        <a href="{{ asset('simphony-greek') }}">Греческо-русская симфония</a>
+                    </li>
+                    <li>
+                        <a href="{{ asset('simphony-ru') }}">Русско-греческая симфония</a>
+                    </li>
+                    <li>
+                        <a href="{{ asset('simphony-greek-word') }}">Симфония греческих словарных форм</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <div class="title">
-                    Connect with us
+                    Социальные сети
                 </div>
                 <ul class="menu">
                     <li>
-                        <a href="#">
-                            <i class="fa fa-instagram"></i>
-                            Instagram
+                        <a href="https://www.facebook.com/%D0%94%D1%83%D1%85%D0%BE%D0%B2%D0%BD%D0%BE%D0%B5-%D0%94%D1%83%D1%85%D0%BE%D0%B2%D0%BD%D1%8B%D0%BC-532776146750507/">
+                            <i class="fa fa-facebook"></i>
+                            Facebook
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://twitter.com/spiritfount">
                             <i class="fa fa-twitter"></i>
                             Twitter
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-dribbble"></i>
-                            Dribbble
+                        <a href="https://vk.com/spiritfount">
+                            <i class="fa fa-vk"></i>
+                            Vkontakte
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-facebook"></i>
-                            Facebook
+                        <a href="https://ok.ru/spiritfount">
+                            <i class="fa fa-odnoklassniki"></i>
+                            Odnoklassniki
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-4 newsletter">
-                <h4>Social</h4>
-                <a href="#" class="social first">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a href="#" class="social">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#" class="social">
-                    <i class="fa fa-dribbble"></i>
-                </a>
-                <a href="#" class="social">
-                    <i class="fa fa-github"></i>
-                </a>
                 <div class="title">
-                    Get awesome updates
+                    Обратная связь <span style="color:red">(врем.неработает)</span>
                 </div>
-                <p>
-                    Enter your email address for news and product launches in the Awesome Space.
-                </p>
-
                 <form class="newsletter-form" autocomplete="off">
-                    <input type="email" id="mc-email" class="form-control" placeholder="Email address" required />
-
-                    <button type="submit">
-                        <i class="fa fa-chevron-right"></i>
-                    </button>
-                    <label for="mc-email" class="text-white newsletter-feedback mt-3"></label>
+                    <textarea class="form-control" placeholder="Сообщение" required></textarea>
                 </form>
+                <button type="button" style="float:right">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
             </div>
         </div>
         <div class="bottom">
             <ul>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Legal</a></li>
-                <li><a href="#">Language</a></li>
+                <li><a href="https://spiritfount.com">spiritfount.com</a></li>
+                <li><a href="https://bible.spiritfount.com">bible.spiritfount.com</a></li>
+                <li><a href="http://bible.in.ua">bible.in.ua</a></li>
             </ul>
         </div>
     </div>

@@ -16,12 +16,14 @@
     "jquery": "^3.1.1",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "vue": "^2.1.10"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-beta",
     "bower": "^1.8.2",
+    "clean-webpack-plugin": "^0.1.17",
     "font-awesome": "^4.7.0",
     "ionicons": "^3.0.0",
     "popper.js": "^1.12.5"

@@ -11,12 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
-//Route::get('/tmp', 'DashboardController@tmp');
-
+Route::get('/', 'DashboardController@index');
 
 Route::get('/view', 'GreekRuController@index');
 Route::get('/bible', 'BibleController@index');
@@ -24,6 +19,7 @@ Route::get('/simphony-greek', 'SimphonyController@index');
 Route::get('/simphony-ru', 'SimphonyController@ruSimphony');
 Route::get('/simphony-greek-word', 'SimphonyController@greekSimphonyWord');
 Route::get('/comment', 'CommentController@index');
+Route::get('/about', 'DashboardController@about');
 
 
 // get datas
