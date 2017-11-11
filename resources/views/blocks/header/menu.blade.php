@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent {{--fixed-top--}}" role="navigation">
     <div class="container no-override">
         <a class="navbar-brand" href="https://spiritfount.com">
-            <img src="images/logo-alt-w.png" class="d-none d-lg-inline mr-2 w-25" />
+            <img src="{{ asset('images/logo-alt-w.png') }}" class="d-none d-lg-inline mr-2 w-25" />
             spiritfount.com
         </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">

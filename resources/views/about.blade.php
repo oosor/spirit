@@ -1,12 +1,8 @@
 @extends('master')
 
-<<<<<<< HEAD
-@section('title', 'Page Title')
-=======
-@section('title', 'Духовное Духовным | Подстрочный перевод | О программе ')
->>>>>>> a6058888dbd006a7cac15c73ed6194afed79a5d3
+@section('title', 'Духовное Духовным | Подстрочный перевод | О программе')
 
-@section('styles')
+section('styles')
     @parent
 @endsection
 
