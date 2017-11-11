@@ -1,2 +1,0 @@
-# spirit
-spiritfount.com
