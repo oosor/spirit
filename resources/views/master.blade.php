@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
-    <meta name="description" content="">
+    <meta name="description" content="Духовное Духовным, подстрочный перевод Библии">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
