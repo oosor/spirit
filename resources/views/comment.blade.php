@@ -4,7 +4,6 @@
 
 @section('styles')
     @parent
-
 @endsection
 
 @section('scripts')
