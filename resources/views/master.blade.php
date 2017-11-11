@@ -26,11 +26,9 @@
 <!--[if lt IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-
     <div class="box">
         @yield('content')
     </div>
-
 <!-- javascript -->
 @section('scripts')
     <script src="{{ asset('assets/lib/jquery.min.js') }}"></script>

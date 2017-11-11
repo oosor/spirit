@@ -4,7 +4,6 @@
 
 @section('styles')
     @parent
-
 @endsection
 
 @section('scripts')
@@ -15,6 +14,7 @@
 @section('content')
 
 @include('blocks.header')
+
 <div class="breadcrumbs">
     <div class="container">
         <h1 class="pull-left">ПОДСТРОЧНЫЙ ПЕРЕВОД БИБЛИИ</h1>
