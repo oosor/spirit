@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Духовное Духовным | Подстрочный перевод | Симфонии ')
+@section('title', 'Духовное Духовным | Подстрочный перевод | Симфонии')
 
 @section('styles')
     @parent
