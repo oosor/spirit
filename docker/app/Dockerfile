@@ -41,6 +41,9 @@ RUN update-alternatives --set php /usr/bin/php7.4 \
     && update-alternatives --set phar /usr/bin/phar7.4 \
     && update-alternatives --set phar.phar /usr/bin/phar.phar7.4
 
+RUN sed -i "s/upload_max_filesize = .*/upload_max_filesize = 100M/" /etc/php/7.4/fpm/php.ini \
+    sed -i "s/post_max_size = .*/post_max_size = 100M/" /etc/php/7.4/fpm/php.ini
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
