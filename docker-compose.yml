@@ -22,7 +22,6 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=apps-proxy"
-
       - "traefik.http.routers.${APP_NAME}.entrypoints=http"
       - "traefik.http.routers.${APP_NAME}.rule=Host(`$APP_URL_TRAEFIK`)"
       - "traefik.http.routers.${APP_NAME}-secure.entrypoints=https"
@@ -65,7 +64,6 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=apps-proxy"
-
       - "traefik.http.routers.${APP_NAME}_pma.entrypoints=http"
       - "traefik.http.routers.${APP_NAME}_pma.rule=Host(`$APP_URL_PMA_TRAEFIK`)"
       - "traefik.http.routers.${APP_NAME}_pma-secure.entrypoints=https"
